@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grace Community | Modern Church</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        :root {
+            --primary: #000000;
+            --accent: #FF6B35;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            scroll-behavior: smooth;
+        }
+        .page-view {
+            display: none;
+            animation: fadeIn 0.6s ease;
+        }
+        .page-view.active {
+            display: block;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .nav-link {
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        .nav-link::before {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            transition: width 0.3s ease;
+        }
+        .nav-link:hover::before,
+        .nav-link.active::before {
+            width: 100%;
+        }
+        .hero-minimal {
+            background: linear-gradient(to bottom, #ffffff 0%, #f8f8f8 100%);
+        }
+        .btn-minimal {
+            transition: all 0.3s ease;
+        }
+        .btn-minimal:hover {
+            transform: translateX(8px);
+        }
+        .card-minimal {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .card-minimal:hover {
+            transform: translateY(-12px);
+        }
+        .text-stroke {
+            -webkit-text-stroke: 2px black;
+            -webkit-text-fill-color: transparent;
+        }
+        .mobile-menu {
+            transform: translateX(100%);
+            transition: transform 0.3s ease;
+        }
+        .mobile-menu.active {
+            transform: translateX(0);
+        }
+    </style>
+</head>
+<body class="bg-white text-black antialiased">
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 bg-white/90 backdrop-blur-xl border-b border-gray-200" id="mainNav">
+        <div class="max-w-7xl mx-auto px-6 lg:px-12">
+            <div class="flex justify-between items-center h-20">
+                <div class="text-2xl font-black tracking-tighter cursor-pointer" onclick="navigateTo('home')">
+                    GRACE
+                </div>
+                
+                <div class="hidden lg:flex items-center gap-12">
+                    <a onclick="navigateTo('home')" class="nav-link active text-sm font-medium cursor-pointer" id="nav-home">HOME</a>
+                    <a onclick="navigateTo('about')" class="nav-link text-sm font-medium cursor-pointer" id="nav-about">ABOUT</a>
+                    <a onclick="navigateTo('sermons')" class="nav-link text-sm font-medium cursor-pointer" id="nav-sermons">SERMONS</a>
+                    <a onclick="navigateTo('events')" class="nav-link text-sm font-medium cursor-pointer" id="nav-events">EVENTS</a>
+                    <a onclick="navigateTo('contact')" class="nav-link text-sm font-medium cursor-pointer" id="nav-contact">CONTACT</a>
+                </div>
+
+                <button onclick="toggleMobileMenu()" class="lg:hidden">
+                    <i class="fa-solid fa-bars text-2xl"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div id="mobileMenu" class="mobile-menu fixed top-0 right-0 w-full h-full bg-white z-[100]">
+        <div class="p-8">
+            <button onclick="toggleMobileMenu()" class="absolute top-8 right-8">
+                <i class="fa-solid fa-xmark text-3xl"></i>
+            </button>
+            <div class="mt-24 space-y-8">
+                <a onclick="navigateTo('home'); toggleMobileMenu();" class="block text-4xl font-black">HOME</a>
+                <a onclick="navigateTo('about'); toggleMobileMenu();" class="block text-4xl font-black">ABOUT</a>
+                <a onclick="navigateTo('sermons'); toggleMobileMenu();" class="block text-4xl font-black">SERMONS</a>
+                <a onclick="navigateTo('events'); toggleMobileMenu();" class="block text-4xl font-black">EVENTS</a>
+                <a onclick="navigateTo('contact'); toggleMobileMenu();" class="block text-4xl font-black">CONTACT</a>
+            </div>
+        </div>
+    </div>
+
+    <main class="pt-20">
+
+        <!-- HOME PAGE -->
+        <div id="view-home" class="page-view active">
+            <!-- Hero -->
+            <section class="hero-minimal min-h-screen flex items-center px-6 lg:px-12">
+                <div class="max-w-7xl mx-auto w-full">
+                    <div class="max-w-4xl">
+                        <h1 class="text-7xl lg:text-9xl font-black leading-none mb-8">
+                            FAITH<br>
+                            FINDS<br>
+                            <span class="text-stroke">HOME</span>
+                        </h1>
+                        <p class="text-xl lg:text-2xl font-light mb-12 max-w-2xl text-gray-600">
+                            A community where authentic faith meets modern life. Join us this Sunday.
+                        </p>
+                        <div class="flex flex-col sm:flex-row gap-4">
+                            <button onclick="navigateTo('about')" class="group px-8 py-4 bg-black text-white font-bold inline-flex items-center gap-4 btn-minimal">
+                                VISIT US
+                                <i class="fa-solid fa-arrow-right group-hover:translate-x-2 transition-transform"></i>
+                            </button>
+                            <button onclick="navigateTo('sermons')" class="px-8 py-4 border-2 border-black font-bold hover:bg-black hover:text-white transition-all">
+                                WATCH ONLINE
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Info Grid -->
+            <section class="py-24 px-6 lg:px-12 bg-black text-white">
+                <div class="max-w-7xl mx-auto grid md:grid-cols-3 gap-1 bg-white">
+                    <div class="bg-black p-12">
+                        <p class="text-sm font-bold mb-4 text-[--accent]">SUNDAYS</p>
+                        <p class="text-4xl font-black mb-4">9 & 11 AM</p>
+                        <p class="text-gray-400">Two service times to fit your schedule</p>
+                    </div>
+                    <div class="bg-black p-12">
+                        <p class="text-sm font-bold mb-4 text-[--accent]">LOCATION</p>
+                        <p class="text-4xl font-black mb-4">CITYVILLE</p>
+                        <p class="text-gray-400">123 Faith Lane, ST 56789</p>
+                    </div>
+                    <div class="bg-black p-12">
+                        <p class="text-sm font-bold mb-4 text-[--accent]">CONTACT</p>
+                        <p class="text-4xl font-black mb-4">555-1234</p>
+                        <p class="text-gray-400">info@grace.org</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Mission -->
+            <section class="py-32 px-6 lg:px-12">
+                <div class="max-w-5xl mx-auto text-center">
+                    <p class="text-sm font-bold mb-6 text-[--accent] tracking-widest">OUR MISSION</p>
+                    <h2 class="text-5xl lg:text-7xl font-black leading-tight mb-8">
+                        Building authentic community through faith
+                    </h2>
+                    <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                        We're not about religion—we're about relationship. With God, with each other, and with our community.
+                    </p>
+                </div>
+            </section>
+
+            <!-- Stats -->
+            <section class="py-24 px-6 lg:px-12 bg-gray-50">
+                <div class="max-w-7xl mx-auto">
+                    <div class="grid grid-cols-2 lg:grid-cols-4 gap-12 text-center">
+                        <div>
+                            <p class="text-6xl font-black mb-2">2.5K+</p>
+                            <p class="text-sm font-medium text-gray-600">MEMBERS</p>
+                        </div>
+                        <div>
+                            <p class="text-6xl font-black mb-2">35+</p>
+                            <p class="text-sm font-medium text-gray-600">MINISTRIES</p>
+                        </div>
+                        <div>
+                            <p class="text-6xl font-black mb-2">150+</p>
+                            <p class="text-sm font-medium text-gray-600">GROUPS</p>
+                        </div>
+                        <div>
+                            <p class="text-6xl font-black mb-2">39</p>
+                            <p class="text-sm font-medium text-gray-600">YEARS</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- ABOUT PAGE -->
+        <div id="view-about" class="page-view">
+            <section class="py-32 px-6 lg:px-12">
+                <div class="max-w-7xl mx-auto">
+                    <div class="grid lg:grid-cols-2 gap-20 items-center mb-32">
+                        <div>
+                            <p class="text-sm font-bold mb-6 text-[--accent] tracking-widest">ABOUT US</p>
+                            <h2 class="text-6xl font-black mb-8 leading-tight">Our story began in 1985</h2>
+                            <p class="text-xl text-gray-600 mb-8 leading-relaxed">
+                                What started as a small gathering in a living room has grown into a thriving community of believers passionate about making a difference.
+                            </p>
+                            <p class="text-xl text-gray-600 leading-relaxed">
+                                Today, we're committed to authentic worship, biblical teaching, and serving our neighbors with the love of Christ.
+                            </p>
+                        </div>
+                        <div class="aspect-square bg-gray-200 rounded-none overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1511795409834-ef04bbd61622?auto=format&fit=crop&q=80&w=800" class="w-full h-full object-cover" alt="Church community">
+                        </div>
+                    </div>
+
+                    <!-- Beliefs -->
+                    <div class="max-w-4xl mx-auto mb-32">
+                        <h3 class="text-4xl font-black mb-16 text-center">WHAT WE BELIEVE</h3>
+                        <div class="space-y-12">
+                            <div class="border-l-4 border-black pl-8">
+                                <h4 class="text-2xl font-bold mb-3">THE SCRIPTURE</h4>
+                                <p class="text-lg text-gray-600">The Bible is the inspired, inerrant word of God—our ultimate authority for faith and life.</p>
+                            </div>
+                            <div class="border-l-4 border-black pl-8">
+                                <h4 class="text-2xl font-bold mb-3">THE TRINITY</h4>
+                                <p class="text-lg text-gray-600">God eternally exists as Father, Son, and Holy Spirit—three persons, one God.</p>
+                            </div>
+                            <div class="border-l-4 border-black pl-8">
+                                <h4 class="text-2xl font-bold mb-3">SALVATION</h4>
+                                <p class="text-lg text-gray-600">We are saved by grace through faith in Jesus Christ alone, not by works.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Leadership -->
+                    <div>
+                        <h3 class="text-4xl font-black mb-16 text-center">LEADERSHIP TEAM</h3>
+                        <div class="grid md:grid-cols-4 gap-8">
+                            <div class="text-center">
+                                <div class="aspect-square bg-gray-200 mb-6 overflow-hidden">
+                                    <img src="https://i.pravatar.cc/400?u=1" class="w-full h-full object-cover" alt="John Thompson">
+                                </div>
+                                <p class="font-bold text-xl mb-1">John Thompson</p>
+                                <p class="text-sm text-gray-600">SENIOR PASTOR</p>
+                            </div>
+                            <div class="text-center">
+                                <div class="aspect-square bg-gray-200 mb-6 overflow-hidden">
+                                    <img src="https://i.pravatar.cc/400?u=2" class="w-full h-full object-cover" alt="Sarah Evans">
+                                </div>
+                                <p class="font-bold text-xl mb-1">Sarah Evans</p>
+                                <p class="text-sm text-gray-600">WORSHIP DIRECTOR</p>
+                            </div>
+                            <div class="text-center">
+                                <div class="aspect-square bg-gray-200 mb-6 overflow-hidden">
+                                    <img src="https://i.pravatar.cc/400?u=3" class="w-full h-full object-cover" alt="Mark Wilson">
+                                </div>
+                                <p class="font-bold text-xl mb-1">Mark Wilson</p>
+                                <p class="text-sm text-gray-600">YOUTH PASTOR</p>
+                            </div>
+                            <div class="text-center">
+                                <div class="aspect-square bg-gray-200 mb-6 overflow-hidden">
+                                    <img src="https://i.pravatar.cc/400?u=4" class="w-full h-full object-cover" alt="Lisa Chen">
+                                </div>
+                                <p class="font-bold text-xl mb-1">Lisa Chen</p>
+                                <p class="text-sm text-gray-600">CHILDREN'S MINISTRY</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- SERMONS PAGE -->
+        <div id="view-sermons" class="page-view">
+            <section class="py-32 px-6 lg:px-12">
+                <div class="max-w-7xl mx-auto">
+                    <div class="mb-20">
+                        <h2 class="text-6xl font-black mb-6">SERMONS</h2>
+                        <p class="text-xl text-gray-600">Watch past messages and catch up on our current series</p>
+                    </div>
+
+                    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-1 bg-gray-200">
+                        <!-- Sermon 1 -->
+                        <div class="bg-white group card-minimal cursor-pointer">
+                            <div class="aspect-video bg-gray-300 overflow-hidden">
+                                <img src="https://images.unsplash.com/photo-1544427920-c49ccfb85579?auto=format&fit=crop&q=80&w=600" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" alt="Sermon">
+                            </div>
+                            <div class="p-8">
+                                <p class="text-xs font-bold mb-3 text-[--accent] tracking-widest">OCT 20, 2024</p>
+                                <h3 class="text-2xl font-bold mb-2">Finding Strength in Weakness</h3>
+                                <p class="text-gray-600">The Way Series</p>
+                            </div>
+                        </div>
+
+                        <!-- Sermon 2 -->
+                        <div class="bg-white group card-minimal cursor-pointer">
+                            <div class="aspect-video bg-gray-300 overflow-hidden">
+                                <img src="https://images.unsplash.com/photo-1507692049790-de58290a4334?auto=format&fit=crop&q=80&w=600" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" alt="Sermon">
+                            </div>
+                            <div class="p-8">
+                                <p class="text-xs font-bold mb-3 text-[--accent] tracking-widest">OCT 13, 2024</p>
+                                <h3 class="text-2xl font-bold mb-2">Peace in the Storm</h3>
+                                <p class="text-gray-600">The Way Series</p>
+                            </div>
+                        </div>
+
+                        <!-- Sermon 3 -->
+                        <div class="bg-white group card-minimal cursor-pointer">
+                            <div class="aspect-video bg-gray-300 overflow-hidden">
+                                <img src="https://images.unsplash.com/photo-1445445290250-d8a346a0e2ec?auto=format&fit=crop&q=80&w=600" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" alt="Sermon">
+                            </div>
+                            <div class="p-8">
+                                <p class="text-xs font-bold mb-3 text-[--accent] tracking-widest">OCT 06, 2024</p>
+                                <h3 class="text-2xl font-bold mb-2">Living with Purpose</h3>
+                                <p class="text-gray-600">Foundations Series</p>
+                            </div>
+                        </div>
+
+                        <!-- Sermon 4 -->
+                        <div class="bg-white group card-minimal cursor-pointer">
+                            <div class="aspect-video bg-gray-300 overflow-hidden">
+                                <img src="https://images.unsplash.com/photo-1501281668745-f7f57925c3b4?auto=format&fit=crop&q=80&w=600" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" alt="Sermon">
+                            </div>
+                            <div class="p-8">
+                                <p class="text-xs font-bold mb-3 text-[--accent] tracking-widest">SEP 29, 2024</p>
+                                <h3 class="text-2xl font-bold mb-2">The Power of Community</h3>
+                                <p class="text-gray-600">Foundations Series</p>
+                            </div>
+                        </div>
+
+                        <!-- Sermon 5 -->
+                        <div class="bg-white group card-minimal cursor-pointer">
+                            <div class="aspect-video bg-gray-300 overflow-hidden">
+                                <img src="https://images.unsplash.com/photo-1490730141103-6cac27aaab94?auto=format&fit=crop&q=80&w=600" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" alt="Sermon">
+                            </div>
+                            <div class="p-8">
+                                <p class="text-xs font-bold mb-3 text-[--accent] tracking-widest">SEP 22, 2024</p>
+                                <h3 class="text-2xl font-bold mb-2">Grace That Transforms</h3>
+                                <p class="text-gray-600">Foundations Series</p>
+                            </div>
+                        </div>
+
+                        <!-- Sermon 6 -->
+                        <div class="bg-white group card-minimal cursor-pointer">
+                            <div class="aspect-video bg-gray-300 overflow-hidden">
+                                <img src="https://images.unsplash.com/photo-1452421822248-d4c2b47f0c81?auto=format&fit=crop&q=80&w=600" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" alt="Sermon">
+                            </div>
+                            <div class="p-8">
+                                <p class="text-xs font-bold mb-3 text-[--accent] tracking-widest">SEP 15, 2024</p>
+                                <h3 class="text-2xl font-bold mb-2">Walking in Freedom</h3>
+                                <p class="text-gray-600">Identity Series</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- EVENTS PAGE -->
+        <div id="view-events" class="page-view">
+            <section class="py-32 px-6 lg:px-12">
+                <div class="max-w-6xl mx-auto">
+                    <div class="mb-20">
+                        <h2 class="text-6xl font-black mb-6">EVENTS</h2>
+                        <p class="text-xl text-gray-600">Join us for upcoming gatherings and community events</p>
+                    </div>
+
+                    <div class="space-y-1 bg-gray-200">
+                        <div class="bg-white p-12 flex flex-col md:flex-row justify-between items-start md:items-center gap-8 hover:bg-gray-50 transition-colors">
+                            <div class="flex-1">
+                                <p class="text-xs font-bold mb-4 text-[--accent] tracking-widest">OCT 24, 2024</p>
+                                <h3 class="text-3xl font-black mb-3">COMMUNITY FOOD DRIVE</h3>
+                                <p class="text-gray-600 text-lg">Volunteers needed to help distribute food packages</p>
+                            </div>
+                            <button class="px-8 py-4 border-2 border-black font-bold hover:bg-black hover:text-white transition-all whitespace-nowrap">
+                                REGISTER
+                            </button>
+                        </div>
+
+                        <div class="bg-white p-12 flex flex-col md:flex-row justify-between items-start md:items-center gap-8 hover:bg-gray-50 transition-colors">
+                            <div class="flex-1">
+                                <p class="text-xs font-bold mb-4 text-[--accent] tracking-widest">OCT 27, 2024</p>
+                                <h3 class="text-3xl font-black mb-3">YOUTH ENCOUNTER NIGHT</h3>
+                                <p class="text-gray-600 text-lg">Worship, pizza, and games for grades 6-12</p>
+                            </div>
+                            <button class="px-8 py-4 border-2 border-black font-bold hover:bg-black hover:text-white transition-all whitespace-nowrap">
+                                RSVP
+                            </button>
+                        </div>
+
+                        <div class="bg-white p-12 flex flex-col md:flex-row justify-between items-start md:items-center gap-8 hover:bg-gray-50 transition-colors">
+                            <div class="flex-1">
+                                <p class="text-xs font-bold mb-4 text-[--accent] tracking-widest">NOV 02, 2024</p>
+                                <h3 class="text-3xl font-black mb-3">DISCOVER GRACE CLASS</h3>
+                                <p class="text-gray-600 text-lg">Learn more about membership and our church</p>
+                            </div>
+                            <button class="px-8 py-4 border-2 border-black font-bold hover:bg-black hover:text-white transition-all whitespace-nowrap">
+                                REGISTER
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- CONTACT PAGE -->
+        <div id="view-contact" class="page-view">
+            <section class="py-32 px-6 lg:px-12">
+                <div class="max-w-7xl mx-auto grid lg:grid-cols-2 gap-20">
+                    <div>
+                        <h2 class="text-6xl font-black mb-12">GET IN TOUCH</h2>
+                        
+                        <div class="space-y-10 mb-16">
+                            <div>
+                                <p class="text-sm font-bold mb-2 text-[--accent] tracking-widest">ADDRESS</p>
+                                <p class="text-2xl font-bold">123 Faith Lane<br>Cityville, ST 56789</p>
+                            </div>
+                            <div>
+                                <p class="text-sm font-bold mb-2 text-[--accent] tracking-widest">PHONE</p>
+                                <p class="text-2xl font-bold">(555) 123-4567</p>
+                            </div>
+                            <div>
+                                <p class="text-sm font-bold mb-2 text-[--accent] tracking-widest">EMAIL</p>
+                                <p class="text-2xl font-bold">info@gracecommunity.org</p>
+                            </div>
+                        </div>
+
+                        <div class="aspect-video bg-gray-200">
+                            <img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&q=80&w=800" class="w-full h-full object-cover" alt="Church building">
+                        </div>
+                    </div>
+
+                    <div>
+                        <form onsubmit="event.preventDefault(); alert('Message sent!');" class="space-y-6">
+                            <div class="grid grid-cols-2 gap-6">
+                                <input type="text" placeholder="FIRST NAME" required class="px-6 py-4 border-2 border-black focus:outline-none focus:border-[--accent] transition-colors font-medium">
+                                <input type="text" placeholder="LAST NAME" required class="px-6 py-4 border-2 border-black focus:outline-none focus:border-[--accent] transition-colors font-medium">
+                            </div>
+                            <input type="email" placeholder="EMAIL" required class="w-full px-6 py-4 border-2 border-black focus:outline-none focus:border-[--accent] transition-colors font-medium">
+                            <input type="tel" placeholder="PHONE" class="w-full px-6 py-4 border-2 border-black focus:outline-none focus:border-[--accent] transition-colors font-medium">
+                            <textarea rows="6" placeholder="MESSAGE" required class="w-full px-6 py-4 border-2 border-black focus:outline-none focus:border-[--accent] transition-colors resize-none font-medium"></textarea>
+                            <button type="submit" class="w-full px-8 py-5 bg-black text-white font-bold hover:bg-[--accent] transition-colors">
+                                SEND MESSAGE
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-black text-white py-20 px-6 lg:px-12">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid md:grid-cols-4 gap-12 mb-16">
+                <div>
+                    <p class="text-2xl font-black mb-6">GRACE</p>
+                    <p class="text-gray-400 mb-6">Following Jesus in modern life since 1985</p>
+                    <div class="flex gap-4">
+                        <a href="#" class="w-12 h-12 border border-white flex items-center justify-center hover:bg-white hover:text-black transition-colors">
+                            <i class="fa-brands fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="w-12 h-12 border border-white flex items-center justify-center hover:bg-white hover:text-black transition-colors">
+                            <i class="fa-brands fa-instagram"></i>
+                        </a>
+                        <a href="#" class="w-12 h-12 border border-white flex items-center justify-center hover:bg-white hover:text-black transition-colors">
+                            <i class="fa-brands fa-youtube"></i>
+                        </a>
+                    </div>
+                </div>
+                <div>
+                    <p class="font-bold mb-6">QUICK LINKS</p>
+                    <ul class="space-y-3 text-gray-400">
+                        <li><a onclick="navigateTo('about')" class="cursor-pointer hover:text-white transition-colors">About</a></li>
+                        <li><a onclick="navigateTo('sermons')" class="cursor-pointer hover:text-white transition-colors">Sermons</a></li>
+                        <li><a onclick="navigateTo('events')" class="cursor-pointer hover:text-white transition-colors">Events</a></li>
+                        <li><a onclick="navigateTo('contact')" class="cursor-pointer hover:text-white transition-colors">Contact</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <p class="font-bold mb-6">CONTACT</p>
+                    <ul class="space-y-3 text-gray-400">
+                        <li>123 Faith Lane<br>Cityville, ST 56789</li>
+                        <li>(555) 123-4567</li>
+                        <li>info@gracecommunity.org</li>
+                    </ul>
+                </div>
+                <div>
+                    <p class="font-bold mb-6">SUBSCRIBE</p>
+                    <form onsubmit="event.preventDefault(); alert('Subscribed!');" class="space-y-4">
+                        <input type="email" placeholder="Your email" required class="w-full px-4 py-3 bg-white/10 border border-white/20 text-white placeholder-gray-400 focus:outline-none focus:border-white transition-colors">
+                        <button class="w-full px-4 py-3 bg-white text-black font-bold hover:bg-[--accent] hover:text-white transition-colors">
+                            JOIN
+                        </button>
+                    </form>
+                </div>
+            </div>
+            <div class="pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-gray-400">
+                <p>&copy; 2024 Grace Community Church</p>
+                <div class="flex gap-8">
+                    <a href="#" class="hover:text-white transition-colors">Privacy</a>
+                    <a href="#" class="hover:text-white transition-colors">Terms</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function navigateTo(view) {
+            window.scrollTo({top: 0, behavior: 'instant'});
+            document.querySelectorAll('.page-view').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.nav-link').forEach(el => el.classList.remove('active'));
+            
+            const targetView = document.getElementById('view-' + view);
+            if(targetView) targetView.classList.add('active');
+            
+            const targetNavLink = document.getElementById('nav-' + view);
+            if(targetNavLink) targetNavLink.classList.add('active');
+        }
+
+        function toggleMobileMenu() {
+            document.getElementById('mobileMenu').classList.toggle('active');
+        }
+    </script>
+</body>
+</html>
