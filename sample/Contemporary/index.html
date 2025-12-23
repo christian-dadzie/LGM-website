@@ -3,25 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Grace Community | Contemporary Church</title>
+    <title>The Lamb of God | Contemporary Church</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Montserrat:wght@700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
         :root {
-            --electric-blue: #0066FF;
-            --hot-pink: #FF006E;
-            --sunshine: #FFD60A;
-            --purple: #7209B7;
+            --electric-blue: #00B4D8;
+            --vibrant-purple: #7209B7;
+            --hot-pink: #F72585;
+            --neon-yellow: #FFC914;
         }
         body {
             font-family: 'Poppins', sans-serif;
             scroll-behavior: smooth;
-        }
-        h1, h2, h3 {
-            font-family: 'Montserrat', sans-serif;
         }
         .page-view {
             display: none;
@@ -31,55 +28,61 @@
             display: block;
         }
         @keyframes slideUp {
-            from { opacity: 0; transform: translateY(30px); }
+            from { opacity: 0; transform: translateY(40px); }
             to { opacity: 1; transform: translateY(0); }
         }
-        .gradient-primary {
-            background: linear-gradient(135deg, var(--electric-blue), var(--purple));
-        }
-        .gradient-secondary {
-            background: linear-gradient(135deg, var(--hot-pink), var(--sunshine));
+        .gradient-hero {
+            background: linear-gradient(135deg, #7209B7 0%, #F72585 50%, #00B4D8 100%);
         }
         .gradient-text {
-            background: linear-gradient(135deg, var(--electric-blue), var(--hot-pink));
+            background: linear-gradient(135deg, #7209B7, #F72585, #00B4D8);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
-        .hero-vibrant {
-            background: linear-gradient(135deg, rgba(0, 102, 255, 0.95), rgba(114, 9, 183, 0.95)), 
-                        url('https://images.unsplash.com/photo-1438032005730-c779502df39b?auto=format&fit=crop&q=80&w=2000');
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
+        .gradient-card {
+            background: linear-gradient(135deg, rgba(114, 9, 183, 0.1) 0%, rgba(247, 37, 133, 0.1) 100%);
+            border: 2px solid transparent;
+            background-clip: padding-box;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .gradient-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 25px 50px rgba(114, 9, 183, 0.3);
+            border-color: var(--vibrant-purple);
         }
         .nav-link {
             position: relative;
             transition: all 0.3s ease;
         }
-        .nav-link:hover {
-            color: var(--hot-pink);
-            transform: translateY(-2px);
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--vibrant-purple), var(--hot-pink));
+            border-radius: 2px;
+            transition: width 0.3s ease;
         }
-        .card-vibrant {
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        .nav-link:hover::after,
+        .nav-link.active::after {
+            width: 100%;
         }
-        .card-vibrant:hover {
-            transform: translateY(-15px) rotate(2deg);
+        .btn-vibrant {
+            background: linear-gradient(135deg, var(--vibrant-purple), var(--hot-pink));
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(114, 9, 183, 0.4);
         }
-        .blob {
-            border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
-            animation: blobMorph 8s ease-in-out infinite;
-        }
-        @keyframes blobMorph {
-            0%, 100% { border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%; }
-            25% { border-radius: 58% 42% 75% 25% / 76% 46% 54% 24%; }
-            50% { border-radius: 50% 50% 33% 67% / 55% 27% 73% 45%; }
-            75% { border-radius: 33% 67% 58% 42% / 63% 68% 32% 37%; }
+        .btn-vibrant:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(114, 9, 183, 0.5);
         }
         .mobile-menu {
             transform: translateX(100%);
-            transition: transform 0.3s ease;
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
         .mobile-menu.active {
             transform: translateX(0);
@@ -88,59 +91,75 @@
             animation: pulseGlow 2s ease-in-out infinite;
         }
         @keyframes pulseGlow {
-            0%, 100% { box-shadow: 0 0 20px rgba(255, 0, 110, 0.5); }
-            50% { box-shadow: 0 0 40px rgba(0, 102, 255, 0.8); }
+            0%, 100% { box-shadow: 0 0 20px rgba(247, 37, 133, 0.6); }
+            50% { box-shadow: 0 0 40px rgba(247, 37, 133, 0.8); }
         }
-        .skew-card {
-            transform: skewY(-2deg);
+        .floating-element {
+            animation: floating 6s ease-in-out infinite;
         }
-        .skew-card > * {
-            transform: skewY(2deg);
+        @keyframes floating {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+        .gradient-border {
+            position: relative;
+            background: white;
+        }
+        .gradient-border::before {
+            content: '';
+            position: absolute;
+            inset: -2px;
+            background: linear-gradient(135deg, var(--vibrant-purple), var(--hot-pink), var(--electric-blue));
+            border-radius: inherit;
+            z-index: -1;
         }
     </style>
 </head>
-<body class="bg-white text-gray-900">
+<body class="bg-slate-50">
 
     <!-- Navigation -->
     <nav class="fixed w-full z-50 bg-white/95 backdrop-blur-xl shadow-lg">
         <div class="max-w-7xl mx-auto px-6">
             <div class="flex justify-between items-center h-20">
                 <div class="flex items-center gap-3 cursor-pointer" onclick="navigateTo('home')">
-                    <div class="w-12 h-12 gradient-primary rounded-xl flex items-center justify-center">
+                    <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-purple-600 to-pink-600 flex items-center justify-center">
                         <i class="fa-solid fa-bolt text-white text-xl"></i>
                     </div>
-                    <span class="text-2xl font-black">GRACE</span>
+                    <div>
+                        <p class="font-black text-xl tracking-tight gradient-text">LAMB OF GOD</p>
+                        <p class="text-[10px] font-bold text-gray-500 tracking-widest">MINISTRIES</p>
+                    </div>
                 </div>
                 
                 <div class="hidden lg:flex items-center gap-10">
-                    <a onclick="navigateTo('home')" class="nav-link active text-sm font-bold cursor-pointer" id="nav-home">HOME</a>
-                    <a onclick="navigateTo('about')" class="nav-link text-sm font-bold cursor-pointer" id="nav-about">ABOUT</a>
-                    <a onclick="navigateTo('sermons')" class="nav-link text-sm font-bold cursor-pointer" id="nav-sermons">SERMONS</a>
-                    <a onclick="navigateTo('events')" class="nav-link text-sm font-bold cursor-pointer" id="nav-events">EVENTS</a>
-                    <button onclick="navigateTo('contact')" class="px-6 py-3 gradient-secondary text-white font-bold rounded-full hover:scale-105 transition-transform">
+                    <a onclick="navigateTo('home')" class="nav-link active text-sm font-bold cursor-pointer text-gray-700" id="nav-home">HOME</a>
+                    <a onclick="navigateTo('about')" class="nav-link text-sm font-bold cursor-pointer text-gray-700" id="nav-about">ABOUT</a>
+                    <a onclick="navigateTo('sermons')" class="nav-link text-sm font-bold cursor-pointer text-gray-700" id="nav-sermons">SERMONS</a>
+                    <a onclick="navigateTo('events')" class="nav-link text-sm font-bold cursor-pointer text-gray-700" id="nav-events">EVENTS</a>
+                    <button onclick="navigateTo('contact')" class="px-6 py-3 btn-vibrant text-white font-bold rounded-full">
                         CONNECT
                     </button>
                 </div>
 
                 <button onclick="toggleMobileMenu()" class="lg:hidden">
-                    <i class="fa-solid fa-bars text-2xl"></i>
+                    <i class="fa-solid fa-bars text-2xl gradient-text"></i>
                 </button>
             </div>
         </div>
     </nav>
 
     <!-- Mobile Menu -->
-    <div id="mobileMenu" class="mobile-menu fixed top-0 right-0 w-full h-full gradient-primary z-[100] text-white">
+    <div id="mobileMenu" class="mobile-menu fixed top-0 right-0 w-full h-full gradient-hero z-[100] text-white">
         <div class="p-8">
             <button onclick="toggleMobileMenu()" class="absolute top-8 right-8">
                 <i class="fa-solid fa-xmark text-3xl"></i>
             </button>
             <div class="mt-24 space-y-8">
-                <a onclick="navigateTo('home'); toggleMobileMenu();" class="block text-4xl font-black hover:text-[--sunshine] transition-colors cursor-pointer">HOME</a>
-                <a onclick="navigateTo('about'); toggleMobileMenu();" class="block text-4xl font-black hover:text-[--sunshine] transition-colors cursor-pointer">ABOUT</a>
-                <a onclick="navigateTo('sermons'); toggleMobileMenu();" class="block text-4xl font-black hover:text-[--sunshine] transition-colors cursor-pointer">SERMONS</a>
-                <a onclick="navigateTo('events'); toggleMobileMenu();" class="block text-4xl font-black hover:text-[--sunshine] transition-colors cursor-pointer">EVENTS</a>
-                <a onclick="navigateTo('contact'); toggleMobileMenu();" class="block text-4xl font-black hover:text-[--sunshine] transition-colors cursor-pointer">CONNECT</a>
+                <a onclick="navigateTo('home'); toggleMobileMenu();" class="block text-4xl font-black cursor-pointer hover:translate-x-4 transition-transform">HOME</a>
+                <a onclick="navigateTo('about'); toggleMobileMenu();" class="block text-4xl font-black cursor-pointer hover:translate-x-4 transition-transform">ABOUT</a>
+                <a onclick="navigateTo('sermons'); toggleMobileMenu();" class="block text-4xl font-black cursor-pointer hover:translate-x-4 transition-transform">SERMONS</a>
+                <a onclick="navigateTo('events'); toggleMobileMenu();" class="block text-4xl font-black cursor-pointer hover:translate-x-4 transition-transform">EVENTS</a>
+                <a onclick="navigateTo('contact'); toggleMobileMenu();" class="block text-4xl font-black cursor-pointer hover:translate-x-4 transition-transform">CONNECT</a>
             </div>
         </div>
     </div>
@@ -150,25 +169,27 @@
         <!-- HOME PAGE -->
         <div id="view-home" class="page-view active">
             <!-- Hero -->
-            <section class="hero-vibrant min-h-[95vh] flex items-center justify-center text-white px-6 relative overflow-hidden">
-                <div class="absolute top-20 right-20 w-96 h-96 bg-[--hot-pink] rounded-full opacity-20 blob"></div>
-                <div class="absolute bottom-20 left-20 w-80 h-80 bg-[--sunshine] rounded-full opacity-20 blob" style="animation-delay: -2s;"></div>
+            <section class="gradient-hero min-h-screen flex items-center justify-center text-white px-6 relative overflow-hidden">
+                <div class="absolute top-20 left-10 w-72 h-72 bg-white/10 rounded-full blur-3xl floating-element"></div>
+                <div class="absolute bottom-20 right-10 w-96 h-96 bg-white/10 rounded-full blur-3xl floating-element" style="animation-delay: 3s;"></div>
                 
                 <div class="max-w-5xl text-center relative z-10">
-                    <div class="inline-block px-6 py-2 bg-white/10 backdrop-blur-md rounded-full mb-8 border border-white/20">
-                        <p class="text-sm font-bold tracking-widest">LIVE SUNDAYS 9AM & 11AM</p>
+                    <div class="mb-6">
+                        <span class="inline-block px-6 py-2 bg-white/20 backdrop-blur-md rounded-full text-sm font-bold mb-8">
+                            ✨ JOIN US THIS SUNDAY
+                        </span>
                     </div>
                     <h1 class="text-6xl md:text-8xl font-black leading-none mb-8">
-                        FAITH<br>MADE<br><span class="text-[--sunshine]">REAL</span>
+                        WHERE FAITH<br>GETS REAL
                     </h1>
-                    <p class="text-xl md:text-2xl mb-12 font-light max-w-2xl mx-auto">
-                        Where authentic community meets life-changing faith. No masks. No pretense. Just real people following Jesus.
+                    <p class="text-xl md:text-2xl mb-12 max-w-3xl mx-auto font-light">
+                        No perfect people allowed. Just real community, authentic worship, and life-changing truth.
                     </p>
                     <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                        <button onclick="navigateTo('about')" class="px-10 py-5 gradient-secondary text-white font-bold rounded-full text-lg hover:scale-105 transition-transform shadow-2xl">
+                        <button onclick="navigateTo('about')" class="px-10 py-5 bg-white text-purple-600 font-black rounded-full hover:scale-105 transition-transform shadow-2xl">
                             START HERE
                         </button>
-                        <button onclick="navigateTo('sermons')" class="px-10 py-5 bg-white/10 backdrop-blur-md border-2 border-white text-white font-bold rounded-full text-lg hover:bg-white hover:text-[--electric-blue] transition-all">
+                        <button onclick="navigateTo('sermons')" class="px-10 py-5 bg-white/10 backdrop-blur-md border-2 border-white font-black rounded-full hover:bg-white hover:text-purple-600 transition-all">
                             WATCH NOW
                         </button>
                     </div>
@@ -176,66 +197,76 @@
             </section>
 
             <!-- Quick Stats -->
-            <section class="py-20 px-6 bg-black text-white">
-                <div class="max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-                    <div>
-                        <p class="text-5xl md:text-6xl font-black gradient-text mb-3">2.5K+</p>
-                        <p class="text-sm font-semibold text-gray-400 uppercase tracking-wider">Members</p>
-                    </div>
-                    <div>
-                        <p class="text-5xl md:text-6xl font-black gradient-text mb-3">35+</p>
-                        <p class="text-sm font-semibold text-gray-400 uppercase tracking-wider">Ministries</p>
-                    </div>
-                    <div>
-                        <p class="text-5xl md:text-6xl font-black gradient-text mb-3">150+</p>
-                        <p class="text-sm font-semibold text-gray-400 uppercase tracking-wider">Small Groups</p>
-                    </div>
-                    <div>
-                        <p class="text-5xl md:text-6xl font-black gradient-text mb-3">39</p>
-                        <p class="text-sm font-semibold text-gray-400 uppercase tracking-wider">Years Strong</p>
+            <section class="py-24 px-6 bg-white">
+                <div class="max-w-7xl mx-auto">
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+                        <div class="gradient-card p-8 rounded-3xl">
+                            <p class="text-5xl font-black gradient-text mb-3">500+</p>
+                            <p class="text-sm font-bold text-gray-600 uppercase tracking-wider">Members</p>
+                        </div>
+                        <div class="gradient-card p-8 rounded-3xl">
+                            <p class="text-5xl font-black gradient-text mb-3">10+</p>
+                            <p class="text-sm font-bold text-gray-600 uppercase tracking-wider">Ministries</p>
+                        </div>
+                        <div class="gradient-card p-8 rounded-3xl">
+                            <p class="text-5xl font-black gradient-text mb-3">50+</p>
+                            <p class="text-sm font-bold text-gray-600 uppercase tracking-wider">Groups</p>
+                        </div>
+                        <div class="gradient-card p-8 rounded-3xl">
+                            <p class="text-5xl font-black gradient-text mb-3">29</p>
+                            <p class="text-sm font-bold text-gray-600 uppercase tracking-wider">Years</p>
+                        </div>
                     </div>
                 </div>
             </section>
 
-            <!-- Info Cards -->
-            <section class="py-24 px-6">
-                <div class="max-w-7xl mx-auto">
-                    <h2 class="text-5xl md:text-6xl font-black text-center mb-16">PLAN YOUR <span class="gradient-text">VISIT</span></h2>
-                    <div class="grid md:grid-cols-3 gap-8">
-                        <div class="bg-gradient-to-br from-blue-50 to-purple-50 p-10 rounded-3xl card-vibrant">
-                            <div class="w-20 h-20 gradient-primary rounded-2xl flex items-center justify-center mb-6">
+            <!-- Service Info -->
+            <section class="py-24 px-6 bg-gradient-to-br from-purple-50 to-pink-50">
+                <div class="max-w-6xl mx-auto">
+                    <h2 class="text-5xl md:text-6xl font-black text-center mb-4 gradient-text">SUNDAY SERVICES</h2>
+                    <p class="text-center text-gray-600 text-xl mb-16">Two experiences, same message</p>
+                    
+                    <div class="grid md:grid-cols-3 gap-6">
+                        <div class="bg-white p-10 rounded-3xl shadow-xl gradient-border">
+                            <div class="w-20 h-20 rounded-2xl bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center mb-6">
                                 <i class="fa-solid fa-clock text-3xl text-white"></i>
                             </div>
-                            <h3 class="text-2xl font-black mb-4">WHEN WE MEET</h3>
-                            <p class="text-3xl font-bold text-[--electric-blue] mb-3">9 & 11 AM</p>
-                            <p class="text-gray-700">Every Sunday morning. Come as you are!</p>
+                            <h3 class="text-2xl font-black mb-3 gradient-text">TIMES</h3>
+                            <p class="text-3xl font-bold text-gray-800 mb-2">9:00 AM</p>
+                            <p class="text-3xl font-bold text-gray-800 mb-4">11:00 AM</p>
+                            <p class="text-sm text-gray-600">Kids programs at both services</p>
                         </div>
-                        <div class="bg-gradient-to-br from-pink-50 to-yellow-50 p-10 rounded-3xl card-vibrant">
-                            <div class="w-20 h-20 gradient-secondary rounded-2xl flex items-center justify-center mb-6">
+                        
+                        <div class="bg-white p-10 rounded-3xl shadow-xl gradient-border">
+                            <div class="w-20 h-20 rounded-2xl bg-gradient-to-br from-blue-500 to-cyan-500 flex items-center justify-center mb-6">
                                 <i class="fa-solid fa-location-dot text-3xl text-white"></i>
                             </div>
-                            <h3 class="text-2xl font-black mb-4">WHERE TO FIND US</h3>
-                            <p class="text-lg font-bold text-[--hot-pink] mb-3">123 Faith Lane</p>
-                            <p class="text-gray-700">Cityville, ST 56789</p>
+                            <h3 class="text-2xl font-black mb-3 gradient-text">LOCATION</h3>
+                            <p class="text-lg font-semibold text-gray-800 mb-2">Accra, Ghana</p>
+                            <p class="text-lg text-gray-600 mb-4">Darkuman, Kokompe</p>
+                            <a href="#" class="text-sm font-bold text-purple-600 hover:text-pink-600 transition-colors">Get Directions →</a>
                         </div>
-                        <div class="bg-gradient-to-br from-purple-50 to-blue-50 p-10 rounded-3xl card-vibrant">
-                            <div class="w-20 h-20 gradient-primary rounded-2xl flex items-center justify-center mb-6">
-                                <i class="fa-solid fa-coffee text-3xl text-white"></i>
+                        
+                        <div class="bg-white p-10 rounded-3xl shadow-xl gradient-border">
+                            <div class="w-20 h-20 rounded-2xl bg-gradient-to-br from-pink-500 to-orange-500 flex items-center justify-center mb-6">
+                                <i class="fa-solid fa-mug-hot text-3xl text-white"></i>
                             </div>
-                            <h3 class="text-2xl font-black mb-4">WHAT TO EXPECT</h3>
-                            <p class="text-lg font-bold text-[--purple] mb-3">Free Coffee</p>
-                            <p class="text-gray-700">Casual dress, live music, and real community</p>
+                            <h3 class="text-2xl font-black mb-3 gradient-text">WHAT TO EXPECT</h3>
+                            <p class="text-gray-700 mb-4">Come as you are! Grab free coffee and find a seat. We're casual, friendly, and excited to meet you.</p>
                         </div>
                     </div>
                 </div>
             </section>
 
             <!-- Mission -->
-            <section class="py-24 px-6 gradient-primary text-white skew-card">
-                <div class="max-w-4xl mx-auto text-center">
-                    <h2 class="text-5xl md:text-6xl font-black mb-8">OUR MISSION IS SIMPLE</h2>
-                    <p class="text-2xl font-light leading-relaxed">
-                        Help people discover Jesus, build authentic relationships, and make a real difference in the world. No religious jargon. No complicated rules. Just Jesus and real life.
+            <section class="py-24 px-6 bg-gray-900 text-white relative overflow-hidden">
+                <div class="absolute inset-0 opacity-20">
+                    <div class="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-purple-600 to-pink-600"></div>
+                </div>
+                <div class="max-w-4xl mx-auto text-center relative z-10">
+                    <h2 class="text-5xl md:text-6xl font-black mb-8">OUR MISSION</h2>
+                    <p class="text-2xl md:text-3xl font-light leading-relaxed">
+                        To help people discover Jesus, grow in their faith, and make a difference in the world.
                     </p>
                 </div>
             </section>
@@ -244,88 +275,108 @@
         <!-- ABOUT PAGE -->
         <div id="view-about" class="page-view">
             <section class="py-24 px-6">
-                <div class="max-w-7xl mx-auto">
+                <div class="max-w-6xl mx-auto">
                     <div class="text-center mb-20">
-                        <h2 class="text-6xl md:text-7xl font-black mb-6">WE'RE <span class="gradient-text">DIFFERENT</span></h2>
-                        <p class="text-2xl text-gray-600 max-w-3xl mx-auto">And we think that's a good thing. Here's our story.</p>
+                        <span class="inline-block px-6 py-2 bg-purple-100 rounded-full text-sm font-bold text-purple-600 mb-6">ABOUT US</span>
+                        <h2 class="text-5xl md:text-7xl font-black mb-6 gradient-text">Our Story</h2>
+                        <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                            From a living room to a movement—here's how The Lamb of God came to be
+                        </p>
                     </div>
 
-                    <div class="grid lg:grid-cols-2 gap-16 items-center mb-32">
+                    <div class="grid lg:grid-cols-2 gap-16 items-center mb-24">
+                        <div class="rounded-3xl overflow-hidden shadow-2xl">
+                            <img src="https://images.unsplash.com/photo-1511795409834-ef04bbd61622?auto=format&fit=crop&q=80&w=800" class="w-full" alt="Church community">
+                        </div>
                         <div>
-                            <div class="inline-block px-6 py-2 gradient-secondary text-white rounded-full mb-6 font-bold">
-                                SINCE 1985
-                            </div>
-                            <h3 class="text-4xl font-black mb-6">From Living Room to Life Change</h3>
-                            <p class="text-lg text-gray-700 mb-6 leading-relaxed">
-                                What started as 12 people crammed into a living room has grown into a movement of thousands. But we've never forgotten our roots—authentic faith, real relationships, and serving our city.
+                            <h3 class="text-4xl font-black mb-6">Started in 1996</h3>
+                            <p class="text-lg text-gray-700 leading-relaxed mb-6">
+                                What began as a handful of people meeting in a living room has grown into a thriving community of believers who are passionate about Jesus and committed to making a difference.
                             </p>
-                            <p class="text-lg text-gray-700 leading-relaxed">
-                                Today, we're the same church with the same heart, just with better coffee and more parking spaces.
+                            <p class="text-lg text-gray-700 leading-relaxed mb-8">
+                                Today, we're still the same at heart—real people, real faith, real impact. We believe church should be a place where everyone belongs, grows, and serves.
                             </p>
-                        </div>
-                        <div class="relative">
-                            <div class="absolute -top-10 -right-10 w-full h-full gradient-primary rounded-3xl opacity-20"></div>
-                            <img src="https://images.unsplash.com/photo-1511795409834-ef04bbd61622?auto=format&fit=crop&q=80&w=800" class="relative rounded-3xl shadow-2xl" alt="Church">
+                            <button onclick="alert('Full story...')" class="px-8 py-4 btn-vibrant text-white font-bold rounded-full">
+                                Read Full Story
+                            </button>
                         </div>
                     </div>
 
-                    <!-- Values -->
-                    <div class="mb-32">
-                        <h3 class="text-4xl font-black text-center mb-16">WHAT WE <span class="gradient-text">STAND FOR</span></h3>
+                    <!-- Core Values -->
+                    <div class="mb-24">
+                        <h3 class="text-4xl font-black text-center mb-16 gradient-text">WHAT WE BELIEVE</h3>
                         <div class="grid md:grid-cols-3 gap-8">
-                            <div class="bg-gradient-to-br from-blue-50 to-white p-8 rounded-3xl border-l-8 border-[--electric-blue]">
-                                <i class="fa-solid fa-book-bible text-5xl text-[--electric-blue] mb-6"></i>
-                                <h4 class="text-2xl font-black mb-4">BIBLE-BASED</h4>
-                                <p class="text-gray-700">Scripture is our foundation. We believe God's word is relevant, transformative, and true.</p>
+                            <div class="gradient-card p-10 rounded-3xl text-center">
+                                <div class="w-20 h-20 mx-auto rounded-2xl bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center mb-6">
+                                    <i class="fa-solid fa-book-bible text-3xl text-white"></i>
+                                </div>
+                                <h4 class="text-2xl font-black mb-4">The Bible</h4>
+                                <p class="text-gray-700">God's word is our guide for everything—faith, life, and truth.</p>
                             </div>
-                            <div class="bg-gradient-to-br from-pink-50 to-white p-8 rounded-3xl border-l-8 border-[--hot-pink]">
-                                <i class="fa-solid fa-heart text-5xl text-[--hot-pink] mb-6"></i>
-                                <h4 class="text-2xl font-black mb-4">GRACE-FILLED</h4>
-                                <p class="text-gray-700">We're all works in progress. Judgment-free zone where everyone is welcome exactly as they are.</p>
+                            <div class="gradient-card p-10 rounded-3xl text-center">
+                                <div class="w-20 h-20 mx-auto rounded-2xl bg-gradient-to-br from-blue-500 to-cyan-500 flex items-center justify-center mb-6">
+                                    <i class="fa-solid fa-heart text-3xl text-white"></i>
+                                </div>
+                                <h4 class="text-2xl font-black mb-4">The Trinity</h4>
+                                <p class="text-gray-700">One God in three persons: Father, Son, and Holy Spirit.</p>
                             </div>
-                            <div class="bg-gradient-to-br from-purple-50 to-white p-8 rounded-3xl border-l-8 border-[--purple]">
-                                <i class="fa-solid fa-hands-holding-heart text-5xl text-[--purple] mb-6"></i>
-                                <h4 class="text-2xl font-black mb-4">OTHERS-FOCUSED</h4>
-                                <p class="text-gray-700">Faith without action is dead. We serve our city and the world with Jesus' love.</p>
+                            <div class="gradient-card p-10 rounded-3xl text-center">
+                                <div class="w-20 h-20 mx-auto rounded-2xl bg-gradient-to-br from-pink-500 to-orange-500 flex items-center justify-center mb-6">
+                                    <i class="fa-solid fa-cross text-3xl text-white"></i>
+                                </div>
+                                <h4 class="text-2xl font-black mb-4">Grace</h4>
+                                <p class="text-gray-700">Salvation comes through faith in Jesus—not by what we do.</p>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Leadership -->
+                    <!-- Team -->
                     <div>
-                        <h3 class="text-4xl font-black text-center mb-16">MEET THE <span class="gradient-text">TEAM</span></h3>
+                        <h3 class="text-4xl font-black text-center mb-16 gradient-text">MEET THE TEAM</h3>
                         <div class="grid md:grid-cols-4 gap-8">
                             <div class="text-center group">
-                                <div class="relative mb-6 inline-block">
-                                    <div class="absolute inset-0 gradient-primary rounded-3xl blur-xl opacity-50 group-hover:opacity-75 transition-opacity"></div>
-                                    <img src="https://i.pravatar.cc/300?u=1" class="relative w-48 h-48 rounded-3xl object-cover" alt="Pastor">
+                                <div class="relative mb-6">
+                                    <div class="w-48 h-48 mx-auto rounded-3xl overflow-hidden shadow-xl group-hover:shadow-2xl transition-shadow">
+                                        <img src="https://i.pravatar.cc/300?u=1" class="w-full h-full object-cover" alt="Pastor">
+                                    </div>
+                                    <div class="absolute -bottom-4 left-1/2 -translate-x-1/2 px-4 py-2 bg-gradient-to-r from-purple-600 to-pink-600 text-white text-xs font-bold rounded-full">
+                                        SENIOR PASTOR
+                                    </div>
                                 </div>
-                                <h4 class="font-black text-xl mb-2">John Thompson</h4>
-                                <p class="text-sm font-bold text-[--electric-blue]">LEAD PASTOR</p>
+                                <h4 class="text-xl font-black mt-6">John Thompson</h4>
                             </div>
                             <div class="text-center group">
-                                <div class="relative mb-6 inline-block">
-                                    <div class="absolute inset-0 gradient-secondary rounded-3xl blur-xl opacity-50 group-hover:opacity-75 transition-opacity"></div>
-                                    <img src="https://i.pravatar.cc/300?u=2" class="relative w-48 h-48 rounded-3xl object-cover" alt="Pastor">
+                                <div class="relative mb-6">
+                                    <div class="w-48 h-48 mx-auto rounded-3xl overflow-hidden shadow-xl group-hover:shadow-2xl transition-shadow">
+                                        <img src="https://i.pravatar.cc/300?u=2" class="w-full h-full object-cover" alt="Pastor">
+                                    </div>
+                                    <div class="absolute -bottom-4 left-1/2 -translate-x-1/2 px-4 py-2 bg-gradient-to-r from-blue-600 to-cyan-600 text-white text-xs font-bold rounded-full whitespace-nowrap">
+                                        WORSHIP DIRECTOR
+                                    </div>
                                 </div>
-                                <h4 class="font-black text-xl mb-2">Sarah Evans</h4>
-                                <p class="text-sm font-bold text-[--hot-pink]">WORSHIP PASTOR</p>
+                                <h4 class="text-xl font-black mt-6">Sarah Evans</h4>
                             </div>
                             <div class="text-center group">
-                                <div class="relative mb-6 inline-block">
-                                    <div class="absolute inset-0 gradient-primary rounded-3xl blur-xl opacity-50 group-hover:opacity-75 transition-opacity"></div>
-                                    <img src="https://i.pravatar.cc/300?u=3" class="relative w-48 h-48 rounded-3xl object-cover" alt="Pastor">
+                                <div class="relative mb-6">
+                                    <div class="w-48 h-48 mx-auto rounded-3xl overflow-hidden shadow-xl group-hover:shadow-2xl transition-shadow">
+                                        <img src="https://i.pravatar.cc/300?u=3" class="w-full h-full object-cover" alt="Pastor">
+                                    </div>
+                                    <div class="absolute -bottom-4 left-1/2 -translate-x-1/2 px-4 py-2 bg-gradient-to-r from-pink-600 to-orange-600 text-white text-xs font-bold rounded-full">
+                                        YOUTH PASTOR
+                                    </div>
                                 </div>
-                                <h4 class="font-black text-xl mb-2">Mark Wilson</h4>
-                                <p class="text-sm font-bold text-[--purple]">YOUTH PASTOR</p>
+                                <h4 class="text-xl font-black mt-6">Mark Wilson</h4>
                             </div>
                             <div class="text-center group">
-                                <div class="relative mb-6 inline-block">
-                                    <div class="absolute inset-0 gradient-secondary rounded-3xl blur-xl opacity-50 group-hover:opacity-75 transition-opacity"></div>
-                                    <img src="https://i.pravatar.cc/300?u=4" class="relative w-48 h-48 rounded-3xl object-cover" alt="Pastor">
+                                <div class="relative mb-6">
+                                    <div class="w-48 h-48 mx-auto rounded-3xl overflow-hidden shadow-xl group-hover:shadow-2xl transition-shadow">
+                                        <img src="https://i.pravatar.cc/300?u=4" class="w-full h-full object-cover" alt="Pastor">
+                                    </div>
+                                    <div class="absolute -bottom-4 left-1/2 -translate-x-1/2 px-4 py-2 bg-gradient-to-r from-green-600 to-teal-600 text-white text-xs font-bold rounded-full whitespace-nowrap">
+                                        KIDS MINISTRY
+                                    </div>
                                 </div>
-                                <h4 class="font-black text-xl mb-2">Lisa Chen</h4>
-                                <p class="text-sm font-bold text-[--sunshine]">KIDS PASTOR</p>
+                                <h4 class="text-xl font-black mt-6">Lisa Chen</h4>
                             </div>
                         </div>
                     </div>
@@ -335,74 +386,123 @@
 
         <!-- SERMONS PAGE -->
         <div id="view-sermons" class="page-view">
-            <section class="py-24 px-6 bg-gray-50">
+            <section class="py-24 px-6 bg-gradient-to-b from-white to-purple-50">
                 <div class="max-w-7xl mx-auto">
                     <div class="text-center mb-20">
-                        <h2 class="text-6xl md:text-7xl font-black mb-6">LATEST <span class="gradient-text">MESSAGES</span></h2>
-                        <p class="text-xl text-gray-600">Real talk about real life from real people</p>
+                        <span class="inline-block px-6 py-2 bg-purple-100 rounded-full text-sm font-bold text-purple-600 mb-6">WATCH & LISTEN</span>
+                        <h2 class="text-5xl md:text-7xl font-black mb-6 gradient-text">Sermons</h2>
+                        <p class="text-xl text-gray-600">Catch up on messages you may have missed</p>
                     </div>
 
                     <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
                         <!-- Sermon 1 -->
-                        <div class="bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-shadow">
-                            <div class="h-56 bg-gradient-to-br from-blue-400 to-purple-600 relative overflow-hidden group">
-                                <img src="https://images.unsplash.com/photo-1544427920-c49ccfb85579?auto=format&fit=crop&q=80&w=600" class="w-full h-full object-cover opacity-70 group-hover:scale-110 transition-transform duration-500" alt="Sermon">
-                                <div class="absolute inset-0 flex items-center justify-center">
-                                    <div class="w-16 h-16 bg-white rounded-full flex items-center justify-center shadow-2xl pulse-glow cursor-pointer">
-                                        <i class="fa-solid fa-play text-2xl text-[--electric-blue] ml-1"></i>
-                                    </div>
+                        <div class="bg-white rounded-3xl overflow-hidden shadow-lg gradient-card group cursor-pointer">
+                            <div class="relative h-56 bg-gray-200 overflow-hidden">
+                                <img src="https://images.unsplash.com/photo-1544427920-c49ccfb85579?auto=format&fit=crop&q=80&w=600" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" alt="Sermon">
+                                <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                                <div class="absolute top-4 right-4">
+                                    <span class="px-3 py-1 bg-gradient-to-r from-purple-600 to-pink-600 text-white text-xs font-bold rounded-full pulse-glow">NEW</span>
                                 </div>
-                                <div class="absolute top-4 right-4 px-4 py-2 bg-[--sunshine] text-black rounded-full text-xs font-black">
-                                    NEW
+                                <div class="absolute inset-0 flex items-center justify-center">
+                                    <div class="w-16 h-16 bg-white/90 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform">
+                                        <i class="fa-solid fa-play text-purple-600 ml-1"></i>
+                                    </div>
                                 </div>
                             </div>
                             <div class="p-8">
-                                <p class="text-xs font-black text-[--electric-blue] mb-3 uppercase tracking-widest">Oct 20, 2024</p>
-                                <h3 class="text-2xl font-black mb-3">Finding Strength in Weakness</h3>
-                                <p class="text-gray-600 mb-4">The Way Series</p>
-                                <button class="w-full py-3 gradient-primary text-white font-bold rounded-xl hover:scale-105 transition-transform">
-                                    WATCH NOW
-                                </button>
+                                <p class="text-xs font-bold text-purple-600 mb-3">OCT 20, 2024 • 45 MIN</p>
+                                <h3 class="text-2xl font-black mb-2">Finding Strength in Weakness</h3>
+                                <p class="text-sm text-gray-600">The Way Series</p>
                             </div>
                         </div>
 
                         <!-- Sermon 2 -->
-                        <div class="bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-shadow">
-                            <div class="h-56 bg-gradient-to-br from-pink-400 to-yellow-500 relative overflow-hidden group">
-                                <img src="https://images.unsplash.com/photo-1507692049790-de58290a4334?auto=format&fit=crop&q=80&w=600" class="w-full h-full object-cover opacity-70 group-hover:scale-110 transition-transform duration-500" alt="Sermon">
+                        <div class="bg-white rounded-3xl overflow-hidden shadow-lg gradient-card group cursor-pointer">
+                            <div class="relative h-56 bg-gray-200 overflow-hidden">
+                                <img src="https://images.unsplash.com/photo-1507692049790-de58290a4334?auto=format&fit=crop&q=80&w=600" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" alt="Sermon">
+                                <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
                                 <div class="absolute inset-0 flex items-center justify-center">
-                                    <div class="w-16 h-16 bg-white rounded-full flex items-center justify-center shadow-2xl cursor-pointer">
-                                        <i class="fa-solid fa-play text-2xl text-[--hot-pink] ml-1"></i>
+                                    <div class="w-16 h-16 bg-white/90 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform">
+                                        <i class="fa-solid fa-play text-purple-600 ml-1"></i>
                                     </div>
                                 </div>
                             </div>
                             <div class="p-8">
-                                <p class="text-xs font-black text-[--hot-pink] mb-3 uppercase tracking-widest">Oct 13, 2024</p>
-                                <h3 class="text-2xl font-black mb-3">Peace in the Storm</h3>
-                                <p class="text-gray-600 mb-4">The Way Series</p>
-                                <button class="w-full py-3 gradient-secondary text-white font-bold rounded-xl hover:scale-105 transition-transform">
-                                    WATCH NOW
-                                </button>
+                                <p class="text-xs font-bold text-purple-600 mb-3">OCT 13, 2024 • 52 MIN</p>
+                                <h3 class="text-2xl font-black mb-2">Peace in the Storm</h3>
+                                <p class="text-sm text-gray-600">The Way Series</p>
                             </div>
                         </div>
 
                         <!-- Sermon 3 -->
-                        <div class="bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-shadow">
-                            <div class="h-56 bg-gradient-to-br from-purple-400 to-blue-500 relative overflow-hidden group">
-                                <img src="https://images.unsplash.com/photo-1445445290250-d8a346a0e2ec?auto=format&fit=crop&q=80&w=600" class="w-full h-full object-cover opacity-70 group-hover:scale-110 transition-transform duration-500" alt="Sermon">
+                        <div class="bg-white rounded-3xl overflow-hidden shadow-lg gradient-card group cursor-pointer">
+                            <div class="relative h-56 bg-gray-200 overflow-hidden">
+                                <img src="https://images.unsplash.com/photo-1445445290250-d8a346a0e2ec?auto=format&fit=crop&q=80&w=600" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" alt="Sermon">
+                                <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
                                 <div class="absolute inset-0 flex items-center justify-center">
-                                    <div class="w-16 h-16 bg-white rounded-full flex items-center justify-center shadow-2xl cursor-pointer">
-                                        <i class="fa-solid fa-play text-2xl text-[--purple] ml-1"></i>
+                                    <div class="w-16 h-16 bg-white/90 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform">
+                                        <i class="fa-solid fa-play text-purple-600 ml-1"></i>
                                     </div>
                                 </div>
                             </div>
                             <div class="p-8">
-                                <p class="text-xs font-black text-[--purple] mb-3 uppercase tracking-widest">Oct 6, 2024</p>
-                                <h3 class="text-2xl font-black mb-3">Living with Purpose</h3>
-                                <p class="text-gray-600 mb-4">Foundations Series</p>
-                                <button class="w-full py-3 gradient-primary text-white font-bold rounded-xl hover:scale-105 transition-transform">
-                                    WATCH NOW
-                                </button>
+                                <p class="text-xs font-bold text-purple-600 mb-3">OCT 06, 2024 • 48 MIN</p>
+                                <h3 class="text-2xl font-black mb-2">Living with Purpose</h3>
+                                <p class="text-sm text-gray-600">Foundations Series</p>
+                            </div>
+                        </div>
+
+                        <!-- Sermon 4 -->
+                        <div class="bg-white rounded-3xl overflow-hidden shadow-lg gradient-card group cursor-pointer">
+                            <div class="relative h-56 bg-gray-200 overflow-hidden">
+                                <img src="https://images.unsplash.com/photo-1501281668745-f7f57925c3b4?auto=format&fit=crop&q=80&w=600" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" alt="Sermon">
+                                <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                                <div class="absolute inset-0 flex items-center justify-center">
+                                    <div class="w-16 h-16 bg-white/90 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform">
+                                        <i class="fa-solid fa-play text-purple-600 ml-1"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="p-8">
+                                <p class="text-xs font-bold text-purple-600 mb-3">SEP 29, 2024 • 41 MIN</p>
+                                <h3 class="text-2xl font-black mb-2">The Power of Community</h3>
+                                <p class="text-sm text-gray-600">Foundations Series</p>
+                            </div>
+                        </div>
+
+                        <!-- Sermon 5 -->
+                        <div class="bg-white rounded-3xl overflow-hidden shadow-lg gradient-card group cursor-pointer">
+                            <div class="relative h-56 bg-gray-200 overflow-hidden">
+                                <img src="https://images.unsplash.com/photo-1490730141103-6cac27aaab94?auto=format&fit=crop&q=80&w=600" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" alt="Sermon">
+                                <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                                <div class="absolute inset-0 flex items-center justify-center">
+                                    <div class="w-16 h-16 bg-white/90 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform">
+                                        <i class="fa-solid fa-play text-purple-600 ml-1"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="p-8">
+                                <p class="text-xs font-bold text-purple-600 mb-3">SEP 22, 2024 • 55 MIN</p>
+                                <h3 class="text-2xl font-black mb-2">Grace That Transforms</h3>
+                                <p class="text-sm text-gray-600">Foundations Series</p>
+                            </div>
+                        </div>
+
+                        <!-- Sermon 6 -->
+                        <div class="bg-white rounded-3xl overflow-hidden shadow-lg gradient-card group cursor-pointer">
+                            <div class="relative h-56 bg-gray-200 overflow-hidden">
+                                <img src="https://images.unsplash.com/photo-1452421822248-d4c2b47f0c81?auto=format&fit=crop&q=80&w=600" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" alt="Sermon">
+                                <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                                <div class="absolute inset-0 flex items-center justify-center">
+                                    <div class="w-16 h-16 bg-white/90 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform">
+                                        <i class="fa-solid fa-play text-purple-600 ml-1"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="p-8">
+                                <p class="text-xs font-bold text-purple-600 mb-3">SEP 15, 2024 • 43 MIN</p>
+                                <h3 class="text-2xl font-black mb-2">Walking in Freedom</h3>
+                                <p class="text-sm text-gray-600">Identity Series</p>
                             </div>
                         </div>
                     </div>
@@ -415,34 +515,232 @@
             <section class="py-24 px-6">
                 <div class="max-w-6xl mx-auto">
                     <div class="text-center mb-20">
-                        <h2 class="text-6xl md:text-7xl font-black mb-6">WHAT'S <span class="gradient-text">HAPPENING</span></h2>
-                        <p class="text-xl text-gray-600">Don't miss out on the fun</p>
+                        <span class="inline-block px-6 py-2 bg-purple-100 rounded-full text-sm font-bold text-purple-600 mb-6">WHAT'S HAPPENING</span>
+                        <h2 class="text-5xl md:text-7xl font-black mb-6 gradient-text">Upcoming Events</h2>
+                        <p class="text-xl text-gray-600">Connect, grow, and have fun with us</p>
                     </div>
 
                     <div class="space-y-6">
-                        <div class="bg-gradient-to-r from-blue-500 to-purple-600 p-10 rounded-3xl text-white flex flex-col md:flex-row items-center gap-8 hover:scale-105 transition-transform">
-                            <div class="flex-shrink-0 text-center">
-                                <div class="w-24 h-24 bg-white/20 backdrop-blur-md rounded-2xl flex flex-col items-center justify-center">
-                                    <p class="text-4xl font-black">24</p>
-                                    <p class="text-xs font-bold uppercase">Oct</p>
+                        <!-- Featured Event -->
+                        <div class="gradient-hero text-white p-12 rounded-3xl relative overflow-hidden">
+                            <div class="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full -mr-32 -mt-32"></div>
+                            <div class="relative z-10">
+                                <span class="inline-block px-4 py-2 bg-yellow-400 text-gray-900 text-xs font-black rounded-full mb-6">⚡ FEATURED EVENT</span>
+                                <div class="grid md:grid-cols-2 gap-8 items-center">
+                                    <div>
+                                        <h3 class="text-4xl md:text-5xl font-black mb-4">Fall Family Festival</h3>
+                                        <p class="text-xl mb-6">October 31 • 3:00 PM - 7:00 PM</p>
+                                        <p class="text-lg mb-8 text-white/90">Games, food trucks, hayrides, pumpkin patch, and more! A safe, fun environment for the whole family.</p>
+                                        <button class="px-8 py-4 bg-white text-purple-600 font-black rounded-full hover:scale-105 transition-transform">
+                                            RSVP NOW
+                                        </button>
+                                    </div>
+                                    <div class="text-right">
+                                        <p class="text-8xl font-black">31</p>
+                                        <p class="text-2xl font-bold">OCTOBER</p>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="flex-1 text-center md:text-left">
-                                <h3 class="text-3xl font-black mb-2">COMMUNITY FOOD DRIVE</h3>
-                                <p class="text-lg mb-1">10:00 AM - 2:00 PM</p>
-                                <p class="text-white/90">Join us in serving our neighbors</p>
+                        </div>
+
+                        <!-- Event 1 -->
+                        <div class="bg-white p-10 rounded-3xl shadow-lg gradient-card flex flex-col md:flex-row items-center gap-8">
+                            <div class="flex-shrink-0 w-28 h-28 rounded-2xl bg-gradient-to-br from-purple-500 to-pink-500 flex flex-col items-center justify-center text-white">
+                                <p class="text-5xl font-black">24</p>
+                                <p class="text-xs font-bold">OCT</p>
                             </div>
-                            <button class="px-8 py-4 bg-white text-[--electric-blue] font-black rounded-full hover:scale-105 transition-transform">
+                            <div class="flex-1 text-center md:text-left">
+                                <h3 class="text-3xl font-black mb-2">Community Food Drive</h3>
+                                <p class="text-gray-600 mb-3">10:00 AM - 2:00 PM • Church Parking Lot</p>
+                                <p class="text-gray-700">Volunteers needed! Help us serve families in need.</p>
+                            </div>
+                            <button class="px-8 py-4 bg-gradient-to-r from-purple-600 to-pink-600 text-white font-bold rounded-full hover:scale-105 transition-transform">
+                                VOLUNTEER
+                            </button>
+                        </div>
+
+                        <!-- Event 2 -->
+                        <div class="bg-white p-10 rounded-3xl shadow-lg gradient-card flex flex-col md:flex-row items-center gap-8">
+                            <div class="flex-shrink-0 w-28 h-28 rounded-2xl bg-gradient-to-br from-blue-500 to-cyan-500 flex flex-col items-center justify-center text-white">
+                                <p class="text-5xl font-black">27</p>
+                                <p class="text-xs font-bold">OCT</p>
+                            </div>
+                            <div class="flex-1 text-center md:text-left">
+                                <h3 class="text-3xl font-black mb-2">Youth Encounter Night</h3>
+                                <p class="text-gray-600 mb-3">6:30 PM - 9:00 PM • Youth Center</p>
+                                <p class="text-gray-700">Worship, pizza, and games for grades 6-12. Bring a friend!</p>
+                            </div>
+                            <button class="px-8 py-4 bg-gradient-to-r from-blue-600 to-cyan-600 text-white font-bold rounded-full hover:scale-105 transition-transform">
                                 SIGN UP
                             </button>
                         </div>
 
-                        <div class="bg-gradient-to-r from-pink-500 to-yellow-500 p-10 rounded-3xl text-white flex flex-col md:flex-row items-center gap-8 hover:scale-105 transition-transform">
-                            <div class="flex-shrink-0 text-center">
-                                <div class="w-24 h-24 bg-white/20 backdrop-blur-md rounded-2xl flex flex-col items-center justify-center">
-                                    <p class="text-4xl font-black">
+                        <!-- Event 3 -->
+                        <div class="bg-white p-10 rounded-3xl shadow-lg gradient-card flex flex-col md:flex-row items-center gap-8">
+                            <div class="flex-shrink-0 w-28 h-28 rounded-2xl bg-gradient-to-br from-pink-500 to-orange-500 flex flex-col items-center justify-center text-white">
+                                <p class="text-5xl font-black">02</p>
+                                <p class="text-xs font-bold">NOV</p>
+                            </div>
+                            <div class="flex-1 text-center md:text-left">
+                                <h3 class="text-3xl font-black mb-2">Discover Grace Class</h3>
+                                <p class="text-gray-600 mb-3">9:00 AM - 12:00 PM • Conference Room</p>
+                                <p class="text-gray-700">Thinking about joining? Learn about our mission and values.</p>
+                            </div>
+                            <button class="px-8 py-4 bg-gradient-to-r from-pink-600 to-orange-600 text-white font-bold rounded-full hover:scale-105 transition-transform">
+                                REGISTER
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
 
+        <!-- CONTACT PAGE -->
+        <div id="view-contact" class="page-view">
+            <section class="py-24 px-6">
+                <div class="max-w-6xl mx-auto">
+                    <div class="text-center mb-20">
+                        <span class="inline-block px-6 py-2 bg-purple-100 rounded-full text-sm font-bold text-purple-600 mb-6">GET IN TOUCH</span>
+                        <h2 class="text-5xl md:text-7xl font-black mb-6 gradient-text">Let's Connect</h2>
+                        <p class="text-xl text-gray-600">We'd love to hear from you!</p>
+                    </div>
 
+                    <div class="grid lg:grid-cols-2 gap-16">
+                        <!-- Contact Info -->
+                        <div>
+                            <div class="space-y-8 mb-12">
+                                <div class="flex items-start gap-6">
+                                    <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center flex-shrink-0">
+                                        <i class="fa-solid fa-location-dot text-2xl text-white"></i>
+                                    </div>
+                                    <div>
+                                        <p class="font-black text-xl mb-2 gradient-text">ADDRESS</p>
+                                        <p class="text-gray-700 text-lg">Accra, Ghana<br>Darkuman, Kokompe</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-start gap-6">
+                                    <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-blue-500 to-cyan-500 flex items-center justify-center flex-shrink-0">
+                                        <i class="fa-solid fa-phone text-2xl text-white"></i>
+                                    </div>
+                                    <div>
+                                        <p class="font-black text-xl mb-2 gradient-text">PHONE</p>
+                                        <p class="text-gray-700 text-lg">(233) 245 123456</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-start gap-6">
+                                    <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-pink-500 to-orange-500 flex items-center justify-center flex-shrink-0">
+                                        <i class="fa-solid fa-envelope text-2xl text-white"></i>
+                                    </div>
+                                    <div>
+                                        <p class="font-black text-xl mb-2 gradient-text">EMAIL</p>
+                                        <p class="text-gray-700 text-lg">info@lambofgod.org</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="rounded-3xl overflow-hidden shadow-2xl">
+                                <img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&q=80&w=800" class="w-full" alt="Church">
+                            </div>
+                        </div>
 
-                                    </body>
-                                    </html>
+                        <!-- Contact Form -->
+                        <div class="bg-white p-10 rounded-3xl shadow-xl gradient-border">
+                            <h3 class="text-3xl font-black mb-8 gradient-text">Send a Message</h3>
+                            <form onsubmit="event.preventDefault(); alert('Message sent!');" class="space-y-6">
+                                <div class="grid grid-cols-2 gap-6">
+                                    <input type="text" placeholder="First Name" required class="px-6 py-4 bg-gray-50 border-2 border-gray-200 rounded-2xl focus:border-purple-500 outline-none transition-colors font-medium">
+                                    <input type="text" placeholder="Last Name" required class="px-6 py-4 bg-gray-50 border-2 border-gray-200 rounded-2xl focus:border-purple-500 outline-none transition-colors font-medium">
+                                </div>
+                                <input type="email" placeholder="Email" required class="w-full px-6 py-4 bg-gray-50 border-2 border-gray-200 rounded-2xl focus:border-purple-500 outline-none transition-colors font-medium">
+                                <input type="tel" placeholder="Phone" class="w-full px-6 py-4 bg-gray-50 border-2 border-gray-200 rounded-2xl focus:border-purple-500 outline-none transition-colors font-medium">
+                                <textarea rows="5" placeholder="Your Message" required class="w-full px-6 py-4 bg-gray-50 border-2 border-gray-200 rounded-2xl focus:border-purple-500 outline-none transition-colors resize-none font-medium"></textarea>
+                                <button type="submit" class="w-full py-5 btn-vibrant text-white font-black rounded-2xl text-lg">
+                                    SEND MESSAGE
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="gradient-hero text-white py-16 px-6">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid md:grid-cols-4 gap-12 mb-12">
+                <div>
+                    <div class="flex items-center gap-3 mb-6">
+                        <div class="w-12 h-12 rounded-xl bg-white/20 flex items-center justify-center">
+                            <i class="fa-solid fa-bolt text-xl"></i>
+                        </div>
+                        <div>
+                            <p class="font-black text-xl">Lamb of God</p>
+                            <p class="text-xs opacity-80">Misnistry</p>
+                        </div>
+                    </div>
+                    <p class="text-white/80 mb-6">Where faith gets real since 1996</p>
+                    <div class="flex gap-3">
+                        <a href="#" class="w-12 h-12 bg-white/10 backdrop-blur-md rounded-xl flex items-center justify-center hover:bg-white hover:text-purple-600 transition-all">
+                            <i class="fa-brands fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="w-12 h-12 bg-white/10 backdrop-blur-md rounded-xl flex items-center justify-center hover:bg-white hover:text-purple-600 transition-all">
+                            <i class="fa-brands fa-instagram"></i>
+                        </a>
+                        <a href="#" class="w-12 h-12 bg-white/10 backdrop-blur-md rounded-xl flex items-center justify-center hover:bg-white hover:text-purple-600 transition-all">
+                            <i class="fa-brands fa-youtube"></i>
+                        </a>
+                    </div>
+                </div>
+                <div>
+                    <p class="font-bold mb-6">QUICK LINKS</p>
+                    <ul class="space-y-3 text-white/80">
+                        <li><a onclick="navigateTo('about')" class="cursor-pointer hover:text-white transition-colors">About</a></li>
+                        <li><a onclick="navigateTo('sermons')" class="cursor-pointer hover:text-white transition-colors">Sermons</a></li>
+                        <li><a onclick="navigateTo('events')" class="cursor-pointer hover:text-white transition-colors">Events</a></li>
+                        <li><a onclick="navigateTo('contact')" class="cursor-pointer hover:text-white transition-colors">Contact</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <p class="font-bold mb-6">CONTACT</p>
+                    <ul class="space-y-3 text-white/80">
+                        <li>Accra, Ghana<br>Darkuman, Kokompe</li>
+                        <li>(233) 245 123456</li>
+                        <li>info@lambofgod.org</li>
+                    </ul>
+                </div>
+                <div>
+                    <p class="font-bold mb-6">STAY UPDATED</p>
+                    <form onsubmit="event.preventDefault(); alert('Subscribed!');" class="space-y-3">
+                        <input type="email" placeholder="Your email" required class="w-full px-4 py-3 bg-white/10 backdrop-blur-md border border-white/20 rounded-xl text-white placeholder-white/60 outline-none focus:bg-white/20 transition-colors">
+                        <button class="w-full px-4 py-3 bg-white text-purple-600 font-bold rounded-xl hover:scale-105 transition-transform">
+                            SUBSCRIBE
+                        </button>
+                    </form>
+                </div>
+            </div>
+            <div class="pt-8 border-t border-white/20 text-center text-sm text-white/60">
+                <p>&copy; 2025 The Lamb of God Misnistry. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function navigateTo(view) {
+            window.scrollTo({top: 0, behavior: 'instant'});
+            document.querySelectorAll('.page-view').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.nav-link').forEach(el => el.classList.remove('active'));
+            
+            const targetView = document.getElementById('view-' + view);
+            if(targetView) targetView.classList.add('active');
+            
+            const targetNavLink = document.getElementById('nav-' + view);
+            if(targetNavLink) targetNavLink.classList.add('active');
+        }
+
+        function toggleMobileMenu() {
+            document.getElementById('mobileMenu').classList.toggle('active');
+        }
+    </script>
+</body>
+</html>
